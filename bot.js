@@ -451,7 +451,7 @@ bot.on('message', function(msg){
 
 
 //consultar los comandos
- bot.onText(/^\/comandos/, (msg) => {
+/* bot.onText(/^\/comandos/, (msg) => {
     bot.getMyCommands().then(function (info) {
         console.log(info)
     });
@@ -471,4 +471,4 @@ bot.on('message', function(msg){
     bot.setMyCommands(opts).then(function (info) {
         console.log(info)
     });;
-});
+});*/

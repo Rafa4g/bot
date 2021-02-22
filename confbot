@@ -6,7 +6,7 @@
 [[ $(dpkg --get-selections|grep -w "npm"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
 echo -e "\033[97m  # apt-get install npm............... $ESTATUS "
 
-#npm i node-telegram-bot-api
+npm i node-telegram-bot-api
 
 bar="\e[0;36m=====================================================\e[0m"
 

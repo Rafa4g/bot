@@ -1,6 +1,13 @@
 #!/bin/bash
 # -*- ENCODING: UTF-8 -*-
 
+[[ $(dpkg --get-selections|grep -w "npm"|head -1) ]] || apt-get install npm -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "npm"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+[[ $(dpkg --get-selections|grep -w "npm"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
+echo -e "\033[97m  # apt-get install npm............... $ESTATUS "
+
+#npm i node-telegram-bot-api
+
 bar="\e[0;36m=====================================================\e[0m"
 
 check_ip () {
@@ -11,6 +18,8 @@ echo "$IP" > /usr/bin/vendor_code
 }
 
 function_verify () {
+  echo -e "verificando..."
+  check_ip
   permited=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/Control/master/Control-Bot")
   [[ $(echo $permited|grep "${IP}") = "" ]] && {
   clear
@@ -21,15 +30,16 @@ function_verify () {
   exit 1
   } || {
   ### INTALAR VERCION DE SCRIPT
-  v1=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/Vercion")
-  echo "$v1" > bot-db/Vercion.txt
+  [[ $(dpkg --get-selections|grep -w "npm"|head -1) ]] || apt-get install bc -y &>/dev/null
+  ver=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/Vercion") 
+  echo ${ver} > bot-db/Vercion
+  [[ ! -e "bot-db/bot.js" ]] && wget -O "bot-db/bot.js" https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/bot.js &>/dev/null
+  [[ ! -e "bot-db/shell.sh" ]] && wget -O "bot-db/shell.sh" https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/shell.sh &>/dev/null
+  chmod +x bot-db/bot.js
+  chmod +x bot-db/shell.sh
   }
 }
 
-download (){
-	wget -O "bot-db/bot.js" https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/bot.js
-	wget -O "bot-db/shell.sh" https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/shell.sh
-}
 
 ini_token () {
 clear
@@ -118,10 +128,8 @@ bot_gen
 }
 
 bot_conf () {
-check_ip
-function_verify
 instaled=bot-db && [[ ! -d ${instaled} ]] && mkdir ${instaled}
-download
+function_verify
 bot_gen
 }
 

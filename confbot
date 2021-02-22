@@ -43,7 +43,6 @@ function_verify () {
 
   cd bot-db
   npm i node-telegram-bot-api
-  cd ../
   }
 }
 

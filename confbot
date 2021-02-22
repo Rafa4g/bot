@@ -1,12 +1,11 @@
 #!/bin/bash
 # -*- ENCODING: UTF-8 -*-
 
-[[ $(dpkg --get-selections|grep -w "npm"|head -1) ]] || apt-get install npm -y &>/dev/null
-[[ $(dpkg --get-selections|grep -w "npm"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
-[[ $(dpkg --get-selections|grep -w "npm"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
-echo -e "\033[97m  # apt-get install npm............... $ESTATUS "
-
-npm i node-telegram-bot-api
+bot_conf () {
+instaled=bot-db && [[ ! -d ${instaled} ]] && mkdir ${instaled}
+function_verify
+bot_gen
+}
 
 bar="\e[0;36m=====================================================\e[0m"
 
@@ -37,6 +36,14 @@ function_verify () {
   [[ ! -e "bot-db/shell.sh" ]] && wget -O "bot-db/shell.sh" https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/shell.sh &>/dev/null
   chmod +x bot-db/bot.js
   chmod +x bot-db/shell.sh
+
+  [[ $(dpkg --get-selections|grep -w "npm"|head -1) ]] || apt-get install npm -y &>/dev/null
+  [[ $(dpkg --get-selections|grep -w "npm"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
+  echo -e "\033[97m  # apt-get install npm............... $ESTATUS "
+
+  cd bot-db
+  npm i node-telegram-bot-api
+  cd ../
   }
 }
 
@@ -124,12 +131,6 @@ echo -e "\033[1;32m9- \033[1;37mIngrese el ID en la\n   opcion \033[1;32m[3] \03
 echo -e "\033[1;32m10-\033[1;37mcomprueve que tiene acceso a\n   las opciones avanzadas de su bot."
 echo -e "$bar"
 read foo
-bot_gen
-}
-
-bot_conf () {
-instaled=bot-db && [[ ! -d ${instaled} ]] && mkdir ${instaled}
-function_verify
 bot_gen
 }
 

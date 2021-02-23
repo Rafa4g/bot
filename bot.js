@@ -21,7 +21,7 @@ if (! fs.existsSync('./userID')) {setup('touch ./userID')};   // IDs de usuarios
 
 
 // ==============================================================================
-const token = fs.readFileSync('./token', 'utf-8'); // <<<<< token de su bot creado en @BotFather
+const token = fs.readFileSync('./token', 'utf-8').split("\n").join(""); // <<<<< token de su bot creado en @BotFather
 
 if (token == '') {console.log('aun no ingrsa su toke'); return};
 
@@ -255,7 +255,7 @@ function comandos_fun(dat) {
 		//console.log(dat);
 		var str = fs.readFileSync('./userID', 'utf-8');
 		var user = str.search(dat.id);
-		const admin = fs.readFileSync('./adminID', 'utf-8');
+		const admin = fs.readFileSync('./adminID', 'utf-8').split("\n").join("");
 
 		if (dat.id == admin){
 

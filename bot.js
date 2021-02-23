@@ -21,7 +21,9 @@ if (! fs.existsSync('./userID')) {setup('touch ./userID')};   // IDs de usuarios
 
 
 // ==============================================================================
-const token = '958291452:AAGFtJKCx92hxJ5U8ZTt-x2A6TGDNLN1xRo'; // <<<<< token de su bot creado en @BotFather
+const token = fs.readFileSync('./token', 'utf-8'); // <<<<< token de su bot creado en @BotFather
+
+if (token == '') {console.log('aun no ingrsa su toke'); return};
 
 const TelegramBot = require('node-telegram-bot-api'); // <<<<< api de telegram
 

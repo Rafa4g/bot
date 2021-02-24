@@ -42,7 +42,7 @@ function_verify () {
   echo -e "\033[97m  # apt-get install npm............... $ESTATUS "
 
   cd bot-db
-  npm i node-telegram-bot-api
+  [[ -d ./node_modules ]] && npm i node-telegram-bot-api
   }
 }
 

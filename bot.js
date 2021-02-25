@@ -256,7 +256,6 @@ function comandos_fun(dat) {
 		const toNumbers = fs.readFileSync('./userID', 'utf-8').split("\n");
 		const userIDS = toNumbers.map((i) => Number(i));
 		var user = userIDS.includes(Number(dat.id));
-		console.log(user);
 		const admin = fs.readFileSync('./adminID', 'utf-8').split("\n").join("");
 		
 

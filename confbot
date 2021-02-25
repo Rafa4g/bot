@@ -32,8 +32,10 @@ function_verify () {
   [[ $(dpkg --get-selections|grep -w "npm"|head -1) ]] || apt-get install bc -y &>/dev/null
   ver=$(curl -sSL "https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/Vercion") 
   echo ${ver} > bot-db/Vercion
+  [[ ! -e "bot-db/package.json" ]] && wget -O "bot-db/package.json" https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/package.json &>/dev/null
   [[ ! -e "bot-db/bot.js" ]] && wget -O "bot-db/bot.js" https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/bot.js &>/dev/null
   [[ ! -e "bot-db/shell.sh" ]] && wget -O "bot-db/shell.sh" https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/shell.sh &>/dev/null
+  chmod +x bot-db/package.json
   chmod +x bot-db/bot.js
   chmod +x bot-db/shell.sh
 
@@ -42,7 +44,7 @@ function_verify () {
   echo -e "\033[97m  # apt-get install npm............... $ESTATUS "
 
   cd bot-db
-  [[ -d ./node_modules ]] && npm i node-telegram-bot-api
+  [[ -d ./node_modules ]] && npm update --save ##npm i node-telegram-bot-api
   }
 }
 

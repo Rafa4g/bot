@@ -19,7 +19,6 @@ if (! fs.existsSync('./adminID')) {setup('touch ./adminID')}; // ID del administ
 if (! fs.existsSync('./token')) {setup('touch ./token')};     // token de su bot creado en @BotFather
 if (! fs.existsSync('./userID')) {setup('touch ./userID')};   // IDs de usuarios
 
-
 // ==============================================================================
 const token = fs.readFileSync('./token', 'utf-8').split("\n").join(""); // <<<<< token de su bot creado en @BotFather
 
@@ -253,9 +252,13 @@ function sources_fun(id, onclic, arg, msg_id, type) {
 //function comandos_fun(id, user, data) {
 function comandos_fun(dat) {
 		//console.log(dat);
-		var str = fs.readFileSync('./userID', 'utf-8');
-		var user = str.search(dat.id);
+
+		const toNumbers = fs.readFileSync('./userID', 'utf-8').split("\n");
+		const userIDS = toNumbers.map((i) => Number(i));
+		var user = userIDS.includes(Number(dat.id));
+		console.log(user);
 		const admin = fs.readFileSync('./adminID', 'utf-8').split("\n").join("");
+		
 
 		if (dat.id == admin){
 
@@ -319,7 +322,7 @@ function comandos_fun(dat) {
 			}
 		}
 
-		else if (user == "0"){
+		else if (user == true){
 			switch(dat.data) {
 				case "/start":
 							bienvenida_fun(dat.id, dat.user);

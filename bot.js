@@ -344,7 +344,7 @@ function comandos_fun(dat) {
 									return;
 								}
 							});
-							const child = execFile('../update.sh',[arg, id], (error,stdout,stderror) => {
+							const child = execFile('../update.sh', (error,stdout,stderror) => {
 								if (error) throw (error);
 							});
 							

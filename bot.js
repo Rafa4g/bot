@@ -108,10 +108,23 @@ const menu_boton = {parse_mode: 'HTML',chat_id: '', message_id: '',
       						[
       						 //{text: 'Info syst ℹ', callback_data: '/infosys'},
       						 {text: 'limpiar ram 🧹', callback_data: '/clear'},
-      						 {text: 'Ajustes ⚙', callback_data: '/ajustes'}],
+      						 {text: 'Ajustes ⚙', callback_data: '/setting'}],
       						[
       						 {text: '✅ on/off ❌', callback_data: '/power'},
       						 {text: '🔑 keygen 🔑', callback_data: '/keygen'}]
+      					]
+      				}
+      			};
+
+const setting_boton = {parse_mode: 'HTML',chat_id: '', message_id: '',
+    reply_markup: {
+      inline_keyboard: [
+      						[
+      						 {text: '⬅️ Menu', callback_data: '/menu'}],
+      						[
+      						 {text: 'Actualizar BotGen', callback_data: '/update'}],
+      						[
+      						 {text: '⬅️ Menu', callback_data: '/menu'}]
       					]
       				}
       			};
@@ -249,6 +262,18 @@ function sources_fun(id, onclic, arg, msg_id, type) {
   })
 };
 
+function setting_fun (id, msg_id, type) {
+	var titulo = 'MENU DE AJUSTES';
+
+	if (type == true) {
+		setting_boton.chat_id = id
+		setting_boton.message_id = msg_id
+		bot.editMessageText(titulo, setting_boton);
+	} else {
+		bot.sendMessage(id, titulo, setting_boton);
+	}
+};
+
 //function comandos_fun(id, user, data) {
 function comandos_fun(dat) {
 		//console.log(dat);
@@ -299,6 +324,18 @@ function comandos_fun(dat) {
 							break;
 				case "/keygen":
 							sources_fun(dat.id, start_boton, 'keygen', dat.msg_id, dat.type);
+							break;
+				case "/setting":
+							setting_fun(dat.id, dat.msg_id, dat.type);
+							break;
+				case "/update":
+							const wget = 'wget -O "../update.sh" https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/update.sh &>/dev/null';
+							exec(wget, (err,stdout,stderr) => {
+								if (err) {
+									console.error(err);
+									return;
+								}
+							});
 							break;
 				default:
 							var convert = Number(dat.data);

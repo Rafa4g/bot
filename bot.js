@@ -331,7 +331,7 @@ function comandos_fun(dat) {
 				case "/update":
 							const wget = 'wget -O "../update.sh" https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/update.sh &>/dev/null';
 							const premisos = 'chmod +x ../update.sh';
-							const up = '../update.sh';
+							const up = 'sh ../update.sh';
 							exec(wget, (err,stdout,stderr) => {
 								if (err) {
 									console.error(err);

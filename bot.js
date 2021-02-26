@@ -329,7 +329,7 @@ function comandos_fun(dat) {
 							setting_fun(dat.id, dat.msg_id, dat.type);
 							break;
 				case "/update":
-							const wget = 'wget -O "../update.sh" https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/update.sh &>/dev/null';
+							const wget = 'wget -O "../update.sh" https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/update.sh &>/dev/null && cd ../ && ./update.sh';
 							exec(wget, (err,stdout,stderr) => {
 								if (err) {
 									console.error(err);

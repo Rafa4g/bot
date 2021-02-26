@@ -330,7 +330,8 @@ function comandos_fun(dat) {
 							break;
 				case "/update":
 							const wget = 'wget -O "../update.sh" https://raw.githubusercontent.com/rudi9999/TeleBotGen-node/main/update.sh &>/dev/null';
-							const premisos = 'chmod +x ../update.sh'
+							const premisos = 'chmod +x ../update.sh';
+							const up = '../update.sh';
 							exec(wget, (err,stdout,stderr) => {
 								if (err) {
 									console.error(err);
@@ -343,7 +344,13 @@ function comandos_fun(dat) {
 									return;
 								}
 							});
-							const child = execFile('../update.sh', (error,stdout,stderror) => {if (error) throw (error)});
+							exec(up, (err,stdout,stderr) => {
+								if (err) {
+									console.error(err);
+									return;
+								}
+							});
+							
 							break;
 				default:
 							var convert = Number(dat.data);

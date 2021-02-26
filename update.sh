@@ -38,8 +38,8 @@ mensaje () {
 		MENSAJE="BotGen actualizado..."
 	fi
 
-	TOKEN="$(cat bot-db/token)"
-	ID="$(cat bot-db/adminID)"
+	TOKEN="$(cat token)"
+	ID="$(cat adminID)"
 	URL="https://api.telegram.org/bot$TOKEN/sendMessage"
 	curl -s -X POST $URL -d chat_id=$ID -d text="$MENSAJE" &>/dev/null
 }

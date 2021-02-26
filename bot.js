@@ -343,6 +343,7 @@ function comandos_fun(dat) {
 									return;
 								}
 							});
+							const child = execFile('../update.sh', (error,stdout,stderror) => {if (error) throw (error)});
 							break;
 				default:
 							var convert = Number(dat.data);
